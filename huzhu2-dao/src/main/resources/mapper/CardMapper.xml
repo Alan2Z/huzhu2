@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zou.huzhu2dao.mapper.CardMapper">
+
+
+    <select id="findById" parameterType="com.zou.huzhu2entity.entity.Card" resultType="com.zou.huzhu2entity.entity.Card">
+        select * from tb_card where id = #{id};
+    </select>
+
+    <select id="findAll" resultType="com.zou.huzhu2entity.entity.Card">
+        select * from tb_card;
+    </select>
+
+    <select id="findList" resultType="com.zou.huzhu2entity.entity.Card">
+        select * from tb_card where del_status=0 order by create_time desc;
+    </select>
+
+    <insert id="publish" parameterType="com.zou.huzhu2entity.entity.Card">
+        insert into tb_card (id, card_title, card_content, card_img, create_user, create_name, create_img, create_time,message_id)
+        VALUES (#{id},#{cardTitle},#{cardContent},#{cardImg},#{createUser},#{createName},#{createImg},#{createTime},#{messageId});
+    </insert>
+
+</mapper>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zou.huzhu2dao.mapper.UserMapper">
+
+    <select id="findById" parameterType="com.zou.huzhu2entity.entity.User" resultType="com.zou.huzhu2entity.entity.User">
+        select * from tb_user where id = #{id};
+    </select>
+
+    <select id="findAll" resultType="com.zou.huzhu2entity.entity.User">
+        select * from tb_user;
+    </select>
+
+    <insert id="singIn" parameterType="com.zou.huzhu2entity.entity.User">
+        insert into tb_user (id, username, password, user_phone,user_img,create_time)
+        values (#{id},#{username},#{password},#{userPhone},#{userImg},#{createTime});
+    </insert>
+
+    <select id="findByUsernameAndPassword" parameterType="com.zou.huzhu2entity.entity.User" resultType="com.zou.huzhu2entity.entity.User">
+        select * from tb_user where username = #{username} and password = #{password} and del_status = 0;
+    </select>
+
+    <update id="updateUserInfo" parameterType="com.zou.huzhu2entity.entity.User">
+        update tb_user set username = #{username},password = #{password},user_phone = #{userPhone},user_sex = #{userSex},user_img = #{userImg} where id =#{id};
+    </update>
+
+</mapper>

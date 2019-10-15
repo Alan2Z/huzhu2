@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zou.huzhu2dao.mapper.CurrencyRecordMapper">
+
+    <select id="findById" parameterType="com.zou.huzhu2entity.entity.CurrencyRecord" resultType="com.zou.huzhu2entity.entity.CurrencyRecord">
+        select * from tb_currency_record where id = #{id};
+    </select>
+
+    <select id="findAll" resultType="com.zou.huzhu2entity.entity.CurrencyRecord">
+        select * from tb_currency_record;
+    </select>
+
+
+
+</mapper>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zou.huzhu2dao.mapper.UserMessageMapper">
+
+    <select id="findById" parameterType="com.zou.huzhu2entity.entity.UserMessage" resultType="com.zou.huzhu2entity.entity.UserMessage">
+        select * from tb_user_message where id = #{id};
+    </select>
+
+    <select id="findAll" resultType="com.zou.huzhu2entity.entity.UserMessage">
+        select * from tb_user_message;
+    </select>
+
+    <insert id="insert" parameterType="com.zou.huzhu2entity.entity.UserMessage">
+        insert into tb_user_message (id, send_id,send_name,send_head, address_id,address_name,address_head, content, type, create_user, create_time)
+        VALUES (#{id},#{sendId},#{sendName},#{sendHead},#{addressId},#{addressName},#{addressHead},#{content},#{type},#{createUser},#{createTime});
+    </insert>
+
+
+    <select id="findMsgList" parameterType="com.zou.huzhu2entity.entity.UserMessage" resultType="com.zou.huzhu2entity.entity.UserMessage">
+        select send_id,send_name,send_head,count(*) as msgNum from tb_user_message where address_id = #{createUser} GROUP BY send_id order by create_time desc;
+    </select>
+
+    <select id="findLastMsg" parameterType="String" resultType="com.zou.huzhu2entity.entity.UserMessage">
+        select content,create_time from tb_user_message where address_id in (#{addressId},#{sendId}) and send_id in (#{sendId},#{addressId}) ORDER BY create_time desc LIMIT 1
+    </select>
+
+
+</mapper>

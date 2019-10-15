@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zou.huzhu2dao.mapper.MessageLogMapper">
+
+    <insert id="insert" parameterType="com.zou.huzhu2entity.entity.MessageLog">
+        insert into message_log (message_id, message, status, next_retry, create_time, update_time)
+        values (#{messageId},#{message},#{status},#{nextRetry},#{createTime},#{updateTime});
+    </insert>
+
+    <update id="updateStatus" parameterType="com.zou.huzhu2entity.entity.MessageLog">
+        update message_log set status = #{status},update_time = #{updateTime} where message_id = #{messageId};
+    </update>
+
+    <update id="retry" parameterType="com.zou.huzhu2entity.entity.MessageLog">
+        update message_log set try_count = try_count+1,update_time = #{updateTime} where message_id = #{messageId};
+    </update>
+
+    <select id="findStatus0AndTimeOutMessage" resultType="com.zou.huzhu2entity.entity.MessageLog">
+        select * from message_log where status = '0' and now()>next_retry;
+    </select>
+</mapper>
